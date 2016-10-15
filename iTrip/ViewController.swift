@@ -16,8 +16,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
+        // Do any additional setup after loading the view, typically from a nib.
         placesTableView.register(
             UINib(nibName: kPlaceTableViewCell, bundle: nil),
             forCellReuseIdentifier: kPlaceTableViewCell
@@ -25,8 +25,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
+        let checkListButton = UIBarButtonItem(title: "CheckList", style: .plain, target: self, action: #selector(checkListTap(sender:)))
+        self.navigationItem.rightBarButtonItem = checkListButton
+        
         let drive:DriveData = DriveData()
-        for string in (drive.get()?.components(separatedBy: "\n"))! {
+        for string in (drive.getPlaces()?.components(separatedBy: "\n"))! {
             if string.contains("http") {
                 let place = Place(string: string)
                 places.append(place)
@@ -60,6 +63,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller:DetailViewController = DetailViewController()
+        controller.updateWithPlace(place: places[indexPath.row])
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -68,6 +72,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return TimeInterval(37)
+    }
+    
+    func checkListTap(sender: Any) {
+        let controller:CheckListViewController = CheckListViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
 

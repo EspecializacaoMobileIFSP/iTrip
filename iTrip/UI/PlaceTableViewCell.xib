@@ -44,7 +44,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKS-wT-Vug">
-                        <state key="normal" title="More"/>
+                        <state key="normal" title="Mais"/>
                     </button>
                 </subviews>
                 <constraints>

@@ -9,3 +9,5 @@
 import Foundation
 
 let kPlaceTableViewCell = "PlaceTableViewCell"
+let kCheckListHeaderView = "CheckListHeaderView"
+let kCheckListTableViewCell = "CheckListTableViewCell"
