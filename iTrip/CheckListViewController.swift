@@ -17,6 +17,12 @@ class CheckListViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.title = "CheckList"
+        
+        let backButton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(backTap(sender:)))
+        backButton.tintColor = UIColor.white
+        self.navigationItem.leftBarButtonItem = backButton
+        
         checkListTableView.register(
             UINib(nibName: kCheckListHeaderView, bundle: nil),
             forHeaderFooterViewReuseIdentifier: kCheckListHeaderView
@@ -40,6 +46,10 @@ class CheckListViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 70
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -70,6 +80,10 @@ class CheckListViewController: UIViewController, UITableViewDataSource, UITableV
         return header
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let keys: [String] = [String](checklist!.categories!.keys)
         let key: String = keys[indexPath.section]
@@ -78,5 +92,8 @@ class CheckListViewController: UIViewController, UITableViewDataSource, UITableV
         cell.itemLabel?.text = checklist!.categories![key]![indexPath.row]
         return cell
     }
-    
+ 
+    func backTap(sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }

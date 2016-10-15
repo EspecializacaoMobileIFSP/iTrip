@@ -26,6 +26,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
         let checkListButton = UIBarButtonItem(title: "CheckList", style: .plain, target: self, action: #selector(checkListTap(sender:)))
+        checkListButton.tintColor = UIColor.white
         self.navigationItem.rightBarButtonItem = checkListButton
         
         let drive:DriveData = DriveData()
@@ -62,6 +63,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.placesTableView.deselectRow(at: indexPath, animated: true)
         let controller:DetailViewController = DetailViewController()
         controller.updateWithPlace(place: places[indexPath.row])
         self.navigationController?.pushViewController(controller, animated: true)

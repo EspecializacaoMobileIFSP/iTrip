@@ -22,6 +22,10 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.title = self.place?.countryName
         
+        let backButton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(backTap(sender:)))
+        backButton.tintColor = UIColor.white
+        self.navigationItem.leftBarButtonItem = backButton
+        
         self.clean()
         self.titleLabel?.text = self.place?.title
         self.descriptionLabel?.text = self.place?.details
@@ -47,4 +51,7 @@ class DetailViewController: UIViewController {
         self.place = place
     }
     
+    func backTap(sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }

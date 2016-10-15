@@ -9,7 +9,7 @@
 import UIKit
 
 class PlaceTableViewCell: UITableViewCell {
-
+    
     @IBOutlet var placeImageView: UIImageView!
     @IBOutlet var countryImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
@@ -20,10 +20,10 @@ class PlaceTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -36,12 +36,13 @@ class PlaceTableViewCell: UITableViewCell {
     func updateWithPlace(place: Place) {
         self.titleLabel?.text = place.title
         self.descriptionLabel?.text = place.countryName
-
+        
+        let weakSelf = self
         ImageCache().get(with: place.country) { (image: UIImage?) in
-            self.countryImageView?.image = image
+            weakSelf.countryImageView?.image = image
         }
         ImageCache().get(with: place.place) { (image: UIImage?) in
-            self.placeImageView?.image = image
+            weakSelf.placeImageView?.image = image
         }
     }
 }
